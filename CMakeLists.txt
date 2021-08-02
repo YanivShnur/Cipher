@@ -3,4 +3,6 @@ project(Cipher)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Cipher main.cpp CaesarCipher.h CaesarCipher.cpp)
+add_executable(Cipher main.cpp
+        CaesarCipher.h CaesarCipher.cpp
+        VigenereCipher.h VigenereCipher.cpp)

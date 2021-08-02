@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "CaesarCipher.h"
+#include "VigenereCipher.h"
 #include <limits>
 using std::ifstream;
 using std::string;
@@ -63,15 +64,39 @@ void menu(){
 
             CaesarCipher CaesarCipher(shiftKey);
             string new_str = CaesarCipher.encrypt(msg);
-            cout << "Encrypted message: " << new_str << endl;
+            cout << endl << "Encrypted message: " << new_str << endl;
             new_str = CaesarCipher.decrypt(new_str);
             cout << "Decrypted message: " << new_str << endl;
+
+
             break;
         }
         case 2:{
             cout << "##################################" << endl;
             cout << "##    2. Vigenere Cipher        ##" << endl;
             cout << "##################################" << endl << endl;
+
+            string msg;
+            cout << "Enter your message and then press the ENTER key:" << endl;
+            cin.ignore(1, '\n');
+            getline(cin, msg);
+
+            string key;
+            cout << endl << "Choose a string key: " << endl;
+            getline(cin, key);
+            while(key.length()!=msg.length())
+            {
+                cin.clear();
+                cout << endl << "Invalid length! Please enter a valid string key (same length as message): " << endl;
+                getline(cin, key);
+            }
+
+            VigenereCipher VigenereCipher(key);
+            string new_str = VigenereCipher.encrypt(msg);
+            cout << endl << "Encrypted message: " << new_str << endl;
+            new_str = VigenereCipher.decrypt(new_str);
+            cout << "Decrypted message: " << new_str << endl;
+
             break;
         }
         case 3:{
