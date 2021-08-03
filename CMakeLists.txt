@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Cipher main.cpp
         CaesarCipher.h CaesarCipher.cpp
-        VigenereCipher.h VigenereCipher.cpp)
+        VigenereCipher.h VigenereCipher.cpp
+        RailfenceCipher.h RailfenceCipher.cpp)
