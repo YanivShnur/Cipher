@@ -7,7 +7,7 @@ VigenereCipher::VigenereCipher(string key) {
     {
         for(int j=0; j<LET_NUM; ++j)
         {
-            vig_table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
+            table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
         }
         ++shift;
     }
@@ -28,7 +28,7 @@ string VigenereCipher::encrypt(const string& str) {
     {
         if(str[i] >= FIRST_LET && str[i] <= END_LET &&
         keyStr[i] >= FIRST_LET && keyStr[i] <= END_LET)
-            encrypted[i] = vig_table[str[i] - FIRST_LET][keyStr[i] - FIRST_LET];
+            encrypted[i] = table[str[i] - FIRST_LET][keyStr[i] - FIRST_LET];
     }
     return encrypted;
 }
@@ -45,7 +45,7 @@ string VigenereCipher::decrypt(const string& str) {
             {
                 for(int j=0; j<LET_NUM; ++j)
                 {
-                    if(vig_table[keyStr[i]-FIRST_LET][j] == str[i])
+                    if(table[keyStr[i]-FIRST_LET][j] == str[i])
                     {
                         decrypted[i] = FIRST_LET + j;
                         break;

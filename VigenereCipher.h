@@ -9,7 +9,7 @@ using std::endl;
 
 class VigenereCipher {
     string key = "";
-    char vig_table[LET_NUM][LET_NUM] = {};
+    char table[LET_NUM][LET_NUM] = {};
 public:
     explicit VigenereCipher(string key);
     string getKey() const;
