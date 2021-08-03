@@ -25,6 +25,30 @@ void logo(){
     cout << logo << endl;
 }
 
+string stringToLower(string str) {
+    int to_sub = 'A' - 'a';
+    for(int i=0; i<str.length(); ++i)
+    {
+        if(str[i] <= 'Z' && str[i] >= 'A')
+        {
+            str[i] -= to_sub;
+        }
+    }
+    return str;
+}
+
+string stringSpacesRemove(string str) {
+    string str_new;
+    for(int i=0; i<str.length(); ++i)
+    {
+        if(str[i] != ' ')
+        {
+            str_new += str[i];
+        }
+    }
+    return str_new;
+}
+
 void menu(){
     cout << "##################################" << endl;
     cout << "##          Cipher Menu         ##" << endl;
@@ -134,8 +158,20 @@ void menu(){
             cout << "##    4. Playfair Cipher        ##" << endl;
             cout << "##################################" << endl << endl;
 
-            PlayfairCipher PlayfairCipher(1);
-            string new_str = PlayfairCipher.encrypt("blabla");
+            string msg;
+            cout << "Enter your message and then press the ENTER key:" << endl;
+            cin.ignore(1, '\n');
+            getline(cin, msg);
+
+            string key;
+            cout << endl << "Choose a string key: " << endl;
+            getline(cin, key);
+
+            msg = stringSpacesRemove(stringToLower(msg));
+            key = stringSpacesRemove(stringToLower(key));
+
+            PlayfairCipher PlayfairCipher(key);
+            string new_str = PlayfairCipher.encrypt(msg);
             cout << endl << "Encrypted message: " << new_str << endl << endl;
             new_str = PlayfairCipher.decrypt(new_str);
             cout << "Decrypted message: " << new_str << endl;
