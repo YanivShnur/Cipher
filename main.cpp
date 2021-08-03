@@ -3,6 +3,7 @@
 #include "CaesarCipher.h"
 #include "VigenereCipher.h"
 #include "RailfenceCipher.h"
+#include "PlayfairCipher.h"
 #include <limits>
 using std::ifstream;
 using std::string;
@@ -132,6 +133,13 @@ void menu(){
             cout << "##################################" << endl;
             cout << "##    4. Playfair Cipher        ##" << endl;
             cout << "##################################" << endl << endl;
+
+            PlayfairCipher PlayfairCipher(1);
+            string new_str = PlayfairCipher.encrypt("blabla");
+            cout << endl << "Encrypted message: " << new_str << endl << endl;
+            new_str = PlayfairCipher.decrypt(new_str);
+            cout << "Decrypted message: " << new_str << endl;
+
             break;
         }
         case 5:{
