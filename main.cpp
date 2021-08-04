@@ -190,15 +190,13 @@ void menu(){
             cin.ignore(1, '\n');
             getline(cin, msg);
 
+            msg = stringSpacesRemove(stringToLower(msg));
+
             string key;
             cout << endl << "Choose a string key: " << endl;
             getline(cin, key);
-            while(key.length()!=msg.length())
-            {
-                cin.clear();
-                cout << endl << "Invalid length! Please enter a valid string key (same length as message): " << endl;
-                getline(cin, key);
-            }
+
+            key = stringSpacesRemove(stringToLower(key));
 
             BeaufortCipher BeaufortCipher(key);
             string new_str = BeaufortCipher.encrypt(msg);
