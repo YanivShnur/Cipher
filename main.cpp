@@ -170,7 +170,7 @@ void menu(){
             msg = stringSpacesRemove(stringToLower(msg));
             key = stringSpacesRemove(stringToLower(key));
 
-            PlayfairCipher PlayfairCipher(key);
+            PlayfairCipher PlayfairCipher(key, msg.length());
             string new_str = PlayfairCipher.encrypt(msg);
             cout << endl << "Encrypted message: " << new_str << endl << endl;
             new_str = PlayfairCipher.decrypt(new_str);

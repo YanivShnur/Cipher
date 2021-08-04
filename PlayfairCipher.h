@@ -10,13 +10,16 @@ using std::endl;
 
 class PlayfairCipher {
     string key = "";
+    int len;
     bool abc[LET_NUM] = { false };
     char table[MAT_SIZE][MAT_SIZE] = {};
 public:
-    PlayfairCipher(string key);
+    PlayfairCipher(string key, int len);
     ~PlayfairCipher();
     string getKey() const;
     void setKey(const string key);
+    int getLen() const;
+    void setLen(const int len);
     string encrypt(const string&); // get string message and return it after encrypt
     string decrypt(const string&); // get string message and return it after decrypt
 };
