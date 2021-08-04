@@ -76,7 +76,7 @@ string PlayfairCipher::encrypt(const string& str) {
         }
     }
     if(encrypted.length()%2!=0)
-        encrypted += 'z';
+        encrypted += END_LET;
 
     int x1,x2,y1,y2,tmp = 0;
     for(i=0;i<len-1;i+=2)
@@ -109,5 +109,30 @@ string PlayfairCipher::encrypt(const string& str) {
 
 string PlayfairCipher::decrypt(const string& str) {
     string decrypted = str;
+    int i, x1,x2,y1,y2,tmp = 0;
+    for(i=0;i<len-1;i+=2)
+    {
+        x1 = idxAtTable[decrypted[i]-FIRST_LET]/MAT_SIZE;
+        y1 = idxAtTable[decrypted[i]-FIRST_LET]%MAT_SIZE;
+        x2 = idxAtTable[decrypted[i+1]-FIRST_LET]/MAT_SIZE;
+        y2 = idxAtTable[decrypted[i+1]-FIRST_LET]%MAT_SIZE;
+        if(x1 == x2)
+        {
+            y1 = (MAT_SIZE+y1-1)%MAT_SIZE;
+            y2 = (MAT_SIZE+y2-1)%MAT_SIZE;
+        }
+        else if(y1 == y2)
+        {
+            x1 = (MAT_SIZE+x1-1)%MAT_SIZE;
+            x2 = (MAT_SIZE+x2-1)%MAT_SIZE;
+        }
+        else{
+            tmp = y1;
+            y1 = y2;
+            y2 = tmp;
+        }
+        decrypted[i] = table[x1][y1];
+        decrypted[i+1] = table[x2][y2];
+    }
     return decrypted;
 }
