@@ -22,6 +22,7 @@ PlayfairCipher::PlayfairCipher(string key, int len) {
             if(idx<length) {
                 if (abc[new_key[idx] - FIRST_LET] == false) {
                     table[i][j] = new_key[idx];
+                    idxAtTable[new_key[idx] - FIRST_LET] = i*MAT_SIZE + j;
                     abc[new_key[idx] - FIRST_LET] = true;
                 }
                 else{
@@ -35,18 +36,10 @@ PlayfairCipher::PlayfairCipher(string key, int len) {
                     ++index;
                 }
                 table[i][j] = FIRST_LET + index;
+                idxAtTable[index] = i*MAT_SIZE + j;
                 ++index;
             }
         }
-    }
-
-    for(int i=0; i<MAT_SIZE; ++i)
-    {
-        for(int j=0; j<MAT_SIZE; ++j)
-        {
-            cout << table[i][j] << " ";
-        }
-        cout << endl;
     }
 }
 
@@ -84,6 +77,33 @@ string PlayfairCipher::encrypt(const string& str) {
     }
     if(encrypted.length()%2!=0)
         encrypted += 'z';
+
+    int x1,x2,y1,y2,tmp = 0;
+    for(i=0;i<len-1;i+=2)
+    {
+        x1 = idxAtTable[encrypted[i]-FIRST_LET]/MAT_SIZE;
+        y1 = idxAtTable[encrypted[i]-FIRST_LET]%MAT_SIZE;
+        x2 = idxAtTable[encrypted[i+1]-FIRST_LET]/MAT_SIZE;
+        y2 = idxAtTable[encrypted[i+1]-FIRST_LET]%MAT_SIZE;
+        if(x1 == x2)
+        {
+            y1 = (y1+1)%MAT_SIZE;
+            y2 = (y2+1)%MAT_SIZE;
+        }
+        else if(y1 == y2)
+        {
+            x1 = (x1+1)%MAT_SIZE;
+            x2 = (x2+1)%MAT_SIZE;
+        }
+        else{
+            tmp = y1;
+            y1 = y2;
+            y2 = tmp;
+        }
+        encrypted[i] = table[x1][y1];
+        encrypted[i+1] = table[x2][y2];
+    }
+
     return encrypted;
 }
 

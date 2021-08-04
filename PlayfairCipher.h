@@ -12,6 +12,7 @@ class PlayfairCipher {
     string key = "";
     int len;
     bool abc[LET_NUM] = { false };
+    int idxAtTable[LET_NUM] = {};
     char table[MAT_SIZE][MAT_SIZE] = {};
 public:
     PlayfairCipher(string key, int len);
