@@ -4,6 +4,8 @@
 #include "VigenereCipher.h"
 #include "RailfenceCipher.h"
 #include "PlayfairCipher.h"
+#include "BeaufortCipher.h"
+#include "AutokeyCipher.h"
 #include <limits>
 using std::ifstream;
 using std::string;
@@ -182,12 +184,57 @@ void menu(){
             cout << "##################################" << endl;
             cout << "##    5. Beaufort Cipher        ##" << endl;
             cout << "##################################" << endl << endl;
+
+            string msg;
+            cout << "Enter your message and then press the ENTER key:" << endl;
+            cin.ignore(1, '\n');
+            getline(cin, msg);
+
+            string key;
+            cout << endl << "Choose a string key: " << endl;
+            getline(cin, key);
+            while(key.length()!=msg.length())
+            {
+                cin.clear();
+                cout << endl << "Invalid length! Please enter a valid string key (same length as message): " << endl;
+                getline(cin, key);
+            }
+
+            BeaufortCipher BeaufortCipher(key);
+            string new_str = BeaufortCipher.encrypt(msg);
+            cout << endl << "Encrypted message: " << new_str << endl;
+            new_str = BeaufortCipher.decrypt(new_str);
+            cout << "Decrypted message: " << new_str << endl;
+
             break;
         }
         case 6:{
             cout << "##################################" << endl;
             cout << "##    6. Autokey Cipher         ##" << endl;
             cout << "##################################" << endl << endl;
+
+
+            string msg;
+            cout << "Enter your message and then press the ENTER key:" << endl;
+            cin.ignore(1, '\n');
+            getline(cin, msg);
+
+            string key;
+            cout << endl << "Choose a string key: " << endl;
+            getline(cin, key);
+            while(key.length()!=msg.length())
+            {
+                cin.clear();
+                cout << endl << "Invalid length! Please enter a valid string key (same length as message): " << endl;
+                getline(cin, key);
+            }
+
+            AutokeyCipher AutokeyCipher(key);
+            string new_str = AutokeyCipher.encrypt(msg);
+            cout << endl << "Encrypted message: " << new_str << endl;
+            new_str = AutokeyCipher.decrypt(new_str);
+            cout << "Decrypted message: " << new_str << endl;
+
             break;
         }
         case 7:{

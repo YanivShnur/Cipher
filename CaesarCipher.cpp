@@ -10,11 +10,11 @@ CaesarCipher::CaesarCipher(const int shift) {
 }
 
 int CaesarCipher::getKey() const {
-    return key;
+    return CaesarCipher::key;
 }
 
-void CaesarCipher::setKey(const int k) {
-    key = k;
+void CaesarCipher::setKey(const int key) {
+    CaesarCipher::key = key;
 }
 
 string CaesarCipher::encrypt(const string& str) {
