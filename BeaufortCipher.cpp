@@ -43,10 +43,7 @@ string BeaufortCipher::encrypt(const string& str) {
 
     for(int i=0; i<str_len; ++i)
     {
-        if(key[i] >= encrypted[i])
-            encrypted[i] = FIRST_LET + (key[i] - encrypted[i]);
-        else
-            encrypted[i] = FIRST_LET + (key[i] - encrypted[i] + LET_NUM)%LET_NUM;
+        encrypted[i] = FIRST_LET + (key[i] - str[i] + LET_NUM)%LET_NUM;
     }
 
     return encrypted;
@@ -54,5 +51,11 @@ string BeaufortCipher::encrypt(const string& str) {
 
 string BeaufortCipher::decrypt(const string& str) {
     string decrypted = str;
+
+    for(int i=0; i<str.length(); ++i)
+    {
+        decrypted[i] = FIRST_LET + (key[i] - str[i] + LET_NUM)%LET_NUM;
+    }
+
     return decrypted;
 }
