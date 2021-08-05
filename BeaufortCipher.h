@@ -9,7 +9,6 @@ using std::endl;
 
 class BeaufortCipher {
     string key = "";
-    char table[LET_NUM][LET_NUM] = {};
 public:
     BeaufortCipher(string key);
     ~BeaufortCipher();

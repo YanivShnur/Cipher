@@ -2,15 +2,6 @@
 
 BeaufortCipher::BeaufortCipher(string key) {
     setKey(key);
-    int shift = 0;
-    for(int i=0; i<LET_NUM; ++i)
-    {
-        for(int j=0; j<LET_NUM; ++j)
-        {
-            table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
-        }
-        ++shift;
-    }
 }
 
 BeaufortCipher::~BeaufortCipher() {
