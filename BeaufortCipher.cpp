@@ -2,6 +2,15 @@
 
 BeaufortCipher::BeaufortCipher(string key) {
     setKey(key);
+    int shift = 0;
+    for(int i=0; i<LET_NUM; ++i)
+    {
+        for(int j=0; j<LET_NUM; ++j)
+        {
+            table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
+        }
+        ++shift;
+    }
 }
 
 BeaufortCipher::~BeaufortCipher() {
@@ -30,6 +39,14 @@ string BeaufortCipher::encrypt(const string& str) {
         if (key.length() < str_len) {
             key += key.substr(0, str_len - key.length());
         }
+    }
+
+    for(int i=0; i<str_len; ++i)
+    {
+        if(key[i] >= encrypted[i])
+            encrypted[i] = FIRST_LET + (key[i] - encrypted[i]);
+        else
+            encrypted[i] = FIRST_LET + (key[i] - encrypted[i] + LET_NUM)%LET_NUM;
     }
 
     return encrypted;
