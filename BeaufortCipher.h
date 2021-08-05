@@ -1,19 +1,15 @@
-#include <iostream>
 #include <string>
-#define LET_NUM 26 // sum of alphabet lowercase letters
-#define FIRST_LET 'a' // first alphabet lowercase letter
-#define END_LET 'z' // last alphabet lowercase letter
+#define TOTAL_LETTERS 26 // English Alphabet consists of 26 letters
+#define FIRST_LETTER 'a' // First letter of the alphabet
+#define LAST_LETTER 'z' // Last letter of the alphabet
 using std::string;
-using std::cout;
-using std::endl;
 
 class BeaufortCipher {
     string key = "";
 public:
-    BeaufortCipher(string key);
-    ~BeaufortCipher();
-    string getKey() const;
-    void setKey(const string key);
+    BeaufortCipher(string key); // Ctor
+    string getKey() const; // Return key
+    void setKey(const string key); // Set key
     string encrypt(const string&); // get string message and return it after encrypt
     string decrypt(const string&); // get string message and return it after decrypt
 };

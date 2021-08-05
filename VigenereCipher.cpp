@@ -1,55 +1,47 @@
 #include "VigenereCipher.h"
 
-VigenereCipher::VigenereCipher(string key) {
+VigenereCipher::VigenereCipher(string key) { // Ctor
     setKey(key);
     int shift = 0;
-    for(int i=0; i<LET_NUM; ++i)
+    for(int i=0; i<TOTAL_LETTERS; ++i)
     {
-        for(int j=0; j<LET_NUM; ++j)
+        for(int j=0; j<TOTAL_LETTERS; ++j)
         {
-            table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
+            table[i][j] = (j + shift)%TOTAL_LETTERS + FIRST_LETTER;
         }
         ++shift;
     }
 }
 
-void VigenereCipher::setKey(const string k) {
-    VigenereCipher::key = k;
+void VigenereCipher::setKey(const string key) { // Set key
+    VigenereCipher::key = key;
 }
 
-string VigenereCipher::getKey() const {
+string VigenereCipher::getKey() const { // Return key
     return VigenereCipher::key;
 }
 
-string VigenereCipher::encrypt(const string& str) {
+string VigenereCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted = str;
-    string keyStr = getKey();
     for(int i=0; i<str.length(); ++i)
     {
-        if(str[i] >= FIRST_LET && str[i] <= END_LET &&
-        keyStr[i] >= FIRST_LET && keyStr[i] <= END_LET)
-            encrypted[i] = table[str[i] - FIRST_LET][keyStr[i] - FIRST_LET];
+        encrypted[i] = table[str[i] - FIRST_LETTER][key[i] - FIRST_LETTER];
     }
     return encrypted;
 }
 
-string VigenereCipher::decrypt(const string& str) {
+string VigenereCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted = str;
-    string keyStr = getKey();
     for(int k=0; k<str.length(); ++k)
     {
-        if(str[k] >= FIRST_LET && str[k] <= END_LET &&
-        keyStr[k] >= FIRST_LET && keyStr[k] <= END_LET)
+        for(int i=0; i<str.length(); ++i)
         {
-            for(int i=0; i<str.length(); ++i)
+            for(int j=0; j<TOTAL_LETTERS; ++j)
             {
-                for(int j=0; j<LET_NUM; ++j)
+                if(table[key[i]-FIRST_LETTER][j] == str[i])
                 {
-                    if(table[keyStr[i]-FIRST_LET][j] == str[i])
-                    {
-                        decrypted[i] = FIRST_LET + j;
-                        break;
-                    }
+                    decrypted[i] = FIRST_LETTER + j;
+                    break;
                 }
             }
         }

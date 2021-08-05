@@ -1,21 +1,18 @@
 #include "BeaufortCipher.h"
 
-BeaufortCipher::BeaufortCipher(string key) {
+BeaufortCipher::BeaufortCipher(string key) { // Ctor
     setKey(key);
 }
 
-BeaufortCipher::~BeaufortCipher() {
-}
-
-void BeaufortCipher::setKey(const string key) {
+void BeaufortCipher::setKey(const string key) { // Set key
     BeaufortCipher::key = key;
 }
 
-string BeaufortCipher::getKey() const {
+string BeaufortCipher::getKey() const { // Return key
     return BeaufortCipher::key;
 }
 
-string BeaufortCipher::encrypt(const string& str) {
+string BeaufortCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted = str;
 
     int str_len = str.length();
@@ -34,18 +31,18 @@ string BeaufortCipher::encrypt(const string& str) {
 
     for(int i=0; i<str_len; ++i)
     {
-        encrypted[i] = FIRST_LET + (key[i] - str[i] + LET_NUM)%LET_NUM;
+        encrypted[i] = FIRST_LETTER + (key[i] - str[i] + TOTAL_LETTERS)%TOTAL_LETTERS;
     }
 
     return encrypted;
 }
 
-string BeaufortCipher::decrypt(const string& str) {
+string BeaufortCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted = str;
 
     for(int i=0; i<str.length(); ++i)
     {
-        decrypted[i] = FIRST_LET + (key[i] - str[i] + LET_NUM)%LET_NUM;
+        decrypted[i] = FIRST_LETTER + (key[i] - str[i] + TOTAL_LETTERS)%TOTAL_LETTERS;
     }
 
     return decrypted;

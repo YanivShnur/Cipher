@@ -14,6 +14,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+
 void logo(){
     const char* logo = R"===(
 *******************************************************************
@@ -28,6 +29,7 @@ void logo(){
     cout << logo << endl;
 }
 
+// Convert a string to lowercase
 string stringToLower(string str) {
     int to_sub = 'A' - 'a';
     int length = str.length();
@@ -41,6 +43,7 @@ string stringToLower(string str) {
     return str;
 }
 
+// Remove spaces from string
 string stringSpacesRemove(string str) {
     string str_new;
     int length = str.length();
@@ -54,6 +57,7 @@ string stringSpacesRemove(string str) {
     return str_new;
 }
 
+// Print selection and get msg as input
 string enterMsg(string selection_str){
     cout << endl;
     cout << "###################################" << endl;
@@ -67,6 +71,8 @@ string enterMsg(string selection_str){
     return msg;
 }
 
+// Check if string contains only letters
+// (There is also an option to compare length to another string)
 bool checkAlpha(string key, const string& checkLength)
 {
     if(!checkLength.empty())
@@ -82,12 +88,13 @@ bool checkAlpha(string key, const string& checkLength)
     return true;
 }
 
+// Get key as input
 string getStringKey(const string& checkLength = "")
 {
     string key;
     cout << endl << "Enter your string key:" << endl;
     getline(cin, key);
-    while( !checkAlpha(key, checkLength))
+    while( !checkAlpha(key, checkLength) )
     {
         cin.clear();
         cout << endl << "Invalid length! Please enter a valid string:" << endl;
@@ -96,7 +103,8 @@ string getStringKey(const string& checkLength = "")
     return key;
 }
 
-template<typename T>
+// Encrypt and decrypt a msg
+template<typename T>  // Ctor template
 void cipherMsg(T Cipher, string msg) {
     string new_str = Cipher.encrypt(msg);
     cout << endl << "Encrypted message: " << new_str << endl << endl;
@@ -124,6 +132,7 @@ void menu(){
     int cipherSelected;
     cin >> cipherSelected;
 
+    // Menu cases
     switch (cipherSelected) {
         case 1:{
             string msg = enterMsg("##    1. Caesar Cipher           ##");
@@ -140,7 +149,7 @@ void menu(){
                 cin >> shiftKey;
             }
 
-            CaesarCipher CaesarCipher(shiftKey);
+            CaesarCipher CaesarCipher(shiftKey); // Ctor
             cipherMsg(CaesarCipher, msg);
 
             break;
@@ -150,7 +159,7 @@ void menu(){
 
             string key = getStringKey(msg);
 
-            VigenereCipher VigenereCipher(key);
+            VigenereCipher VigenereCipher(key); // Ctor
             cipherMsg(VigenereCipher, msg);
 
             break;
@@ -170,7 +179,7 @@ void menu(){
                 cin >> shiftKey;
             }
 
-            RailfenceCipher RailfenceCipher(shiftKey, msg.length());
+            RailfenceCipher RailfenceCipher(shiftKey, msg.length()); // Ctor
             cipherMsg(RailfenceCipher, msg);
 
             break;
@@ -182,7 +191,7 @@ void menu(){
             string key = getStringKey();
             key = stringToLower(key);
 
-            PlayfairCipher PlayfairCipher(key, msg.length());
+            PlayfairCipher PlayfairCipher(key, msg.length()); // Ctor
             cipherMsg(PlayfairCipher, msg);
 
             break;
@@ -194,7 +203,7 @@ void menu(){
             string key = getStringKey();
             key = stringToLower(key);
 
-            BeaufortCipher BeaufortCipher(key);
+            BeaufortCipher BeaufortCipher(key); // Ctor
             cipherMsg(BeaufortCipher, msg);
 
             break;
@@ -206,7 +215,7 @@ void menu(){
             string key = getStringKey();
             key = stringToLower(key);
 
-            AutokeyCipher AutokeyCipher(key);
+            AutokeyCipher AutokeyCipher(key); // Ctor
             cipherMsg(AutokeyCipher, msg);
 
             break;

@@ -1,6 +1,6 @@
 #include "RailfenceCipher.h"
 
-RailfenceCipher::RailfenceCipher(int key, int len) {
+RailfenceCipher::RailfenceCipher(int key, int len) { // Ctor
     setKey(key);
     setLen(len);
     table = new char[key * len];
@@ -12,27 +12,27 @@ RailfenceCipher::RailfenceCipher(int key, int len) {
     }
 }
 
-RailfenceCipher::~RailfenceCipher() {
+RailfenceCipher::~RailfenceCipher() { //Dtor
     delete[] table;
 }
 
-void RailfenceCipher::setKey(const int key) {
+void RailfenceCipher::setKey(const int key) { // Set key
     RailfenceCipher::key = key;
 }
 
-int RailfenceCipher::getKey() const {
+int RailfenceCipher::getKey() const { // Return key
     return RailfenceCipher::key;
 }
 
-void RailfenceCipher::setLen(const int len) {
+void RailfenceCipher::setLen(const int len) { // Set length of string message
     RailfenceCipher::len = len;
 }
 
-int RailfenceCipher::getLen() const {
+int RailfenceCipher::getLen() const { // Return length saved value of string message
     return RailfenceCipher::len;
 }
 
-string RailfenceCipher::encrypt(const string& str) {
+string RailfenceCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted;
     int row = 0, col = 0;
     bool direction = false;
@@ -57,7 +57,7 @@ string RailfenceCipher::encrypt(const string& str) {
     return encrypted;
 }
 
-string RailfenceCipher::decrypt(const string& str) {
+string RailfenceCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted;
     for (int i = 0; i<key; ++i)
     {

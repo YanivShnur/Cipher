@@ -1,30 +1,27 @@
 #include "AutokeyCipher.h"
 
-AutokeyCipher::AutokeyCipher(string key) {
+AutokeyCipher::AutokeyCipher(string key) { // Ctor
     setKey(key);
     int shift = 0;
-    for(int i=0; i<LET_NUM; ++i)
+    for(int i=0; i<TOTAL_LETTERS; ++i)
     {
-        for(int j=0; j<LET_NUM; ++j)
+        for(int j=0; j<TOTAL_LETTERS; ++j)
         {
-            table[i][j] = (j + shift)%LET_NUM + FIRST_LET;
+            table[i][j] = (j + shift)%TOTAL_LETTERS + FIRST_LETTER;
         }
         ++shift;
     }
 }
 
-AutokeyCipher::~AutokeyCipher() {
-}
-
-void AutokeyCipher::setKey(const string key) {
+void AutokeyCipher::setKey(const string key) { // Set key
     AutokeyCipher::key = key;
 }
 
-string AutokeyCipher::getKey() const {
+string AutokeyCipher::getKey() const { // Return key
     return AutokeyCipher::key;
 }
 
-string AutokeyCipher::encrypt(const string& str) {
+string AutokeyCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted = str;
 
     int str_len = str.length();
@@ -38,23 +35,23 @@ string AutokeyCipher::encrypt(const string& str) {
 
     for(int i=0; i<str.length(); ++i)
     {
-        encrypted[i] = table[str[i] - FIRST_LET][key[i] - FIRST_LET];
+        encrypted[i] = table[str[i] - FIRST_LETTER][key[i] - FIRST_LETTER];
     }
     return encrypted;
 }
 
-string AutokeyCipher::decrypt(const string& str) {
+string AutokeyCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted = str;
 
     for(int k=0; k<str.length(); ++k)
     {
         for(int i=0; i<str.length(); ++i)
         {
-            for(int j=0; j<LET_NUM; ++j)
+            for(int j=0; j<TOTAL_LETTERS; ++j)
             {
-                if(table[key[i]-FIRST_LET][j] == str[i])
+                if(table[key[i]-FIRST_LETTER][j] == str[i])
                 {
-                    decrypted[i] = FIRST_LET + j;
+                    decrypted[i] = FIRST_LETTER + j;
                     break;
                 }
             }
