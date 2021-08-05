@@ -200,7 +200,7 @@ void menu(){
 
             BeaufortCipher BeaufortCipher(key);
             string new_str = BeaufortCipher.encrypt(msg);
-            cout << endl << "Encrypted message: " << new_str << endl;
+            cout << endl << "Encrypted message: " << new_str << endl << endl;
             new_str = BeaufortCipher.decrypt(new_str);
             cout << "Decrypted message: " << new_str << endl;
 
@@ -211,25 +211,22 @@ void menu(){
             cout << "##    6. Autokey Cipher         ##" << endl;
             cout << "##################################" << endl << endl;
 
-
             string msg;
             cout << "Enter your message and then press the ENTER key:" << endl;
             cin.ignore(1, '\n');
             getline(cin, msg);
 
+            msg = stringSpacesRemove(stringToLower(msg));
+
             string key;
             cout << endl << "Choose a string key: " << endl;
             getline(cin, key);
-            while(key.length()!=msg.length())
-            {
-                cin.clear();
-                cout << endl << "Invalid length! Please enter a valid string key (same length as message): " << endl;
-                getline(cin, key);
-            }
+
+            key = stringSpacesRemove(stringToLower(key));
 
             AutokeyCipher AutokeyCipher(key);
             string new_str = AutokeyCipher.encrypt(msg);
-            cout << endl << "Encrypted message: " << new_str << endl;
+            cout << endl << "Encrypted message: " << new_str << endl << endl;
             new_str = AutokeyCipher.decrypt(new_str);
             cout << "Decrypted message: " << new_str << endl;
 
