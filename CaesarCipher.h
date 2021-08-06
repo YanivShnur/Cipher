@@ -6,9 +6,9 @@ using std::string;
 
 class CaesarCipher {
     int key = 3; // Default key
-    char abc_array[TOTAL_LETTERS] = {};
-    char abc_encrypted_array[TOTAL_LETTERS] = {};
-    char abc_decrypted_array[TOTAL_LETTERS] = {};
+    char abc_array[TOTAL_LETTERS] = {}; // Alphabet array
+    char abc_encrypted_array[TOTAL_LETTERS] = {}; // Encrypted Alphabet array
+    char abc_decrypted_array[TOTAL_LETTERS] = {}; // Decrypted Alphabet array
 public:
     explicit CaesarCipher(int shift); // Ctor
     int getKey() const; // Return key

@@ -7,10 +7,10 @@ using std::string;
 
 class PlayfairCipher {
     string key = "";
-    int len;
-    bool abc[TOTAL_LETTERS] = { false };
-    int idxAtTable[TOTAL_LETTERS] = {};
-    char table[MATRIX_SIZE][MATRIX_SIZE] = {};
+    int len = 0;
+    bool abc[TOTAL_LETTERS] = { false }; // Array of used letters
+    int idxAtTable[TOTAL_LETTERS] = {}; // Array indexes of letters at table
+    char table[MATRIX_SIZE][MATRIX_SIZE] = {}; // Key Square Matrix (5×5)
 public:
     PlayfairCipher(string key, int len); // Ctor
     string getKey() const; // Return key

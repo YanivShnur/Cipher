@@ -4,7 +4,7 @@ using std::string;
 class RailfenceCipher {
     int key = 2;
     int len = 2;
-    char* table;
+    char* table; //  Rail matrix [key][len] dynamic Allocation
 public:
     RailfenceCipher(int key, int len); // Ctor
     ~RailfenceCipher(); // Dtor

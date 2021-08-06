@@ -6,7 +6,6 @@ using std::string;
 
 class AutokeyCipher {
     string key = "";
-    char table[TOTAL_LETTERS][TOTAL_LETTERS] = {};
 public:
     AutokeyCipher(string key); // Ctor
     string getKey() const; // Return key

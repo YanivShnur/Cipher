@@ -3,9 +3,9 @@
 RailfenceCipher::RailfenceCipher(int key, int len) { // Ctor
     setKey(key);
     setLen(len);
-    table = new char[key * len];
-    for (int i = 0; i<key; ++i)
-    {
+
+    table = new char[key * len]; // Init Rail matrix
+    for (int i = 0; i<key; ++i){
         for (int j = 0; j<len; ++j) {
             table[i*len + j] = '*';
         }
@@ -13,7 +13,7 @@ RailfenceCipher::RailfenceCipher(int key, int len) { // Ctor
 }
 
 RailfenceCipher::~RailfenceCipher() { //Dtor
-    delete[] table;
+    delete[] table; // Delete the dynamic allocation
 }
 
 void RailfenceCipher::setKey(const int key) { // Set key
@@ -34,10 +34,14 @@ int RailfenceCipher::getLen() const { // Return length saved value of string mes
 
 string RailfenceCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted;
-    int row = 0, col = 0;
+
+    // Written downwards diagonally, when we reach the bottom rail
+    // then written upwards diagonally, when we reach the top rail
+    // the direction is changed again, and so on until the whole msg is written out
+    int row = 0;
+    int col = 0;
     bool direction = false;
-    for (int i=0; i<len; ++i)
-    {
+    for (int i=0; i<len; ++i){
         if (row == 0 || row == key-1)
             direction = !direction;
         table[row*len + col] = str[i];
@@ -45,8 +49,8 @@ string RailfenceCipher::encrypt(const string& str) { // Encrypt a string
         direction ? row++ : row--;
     }
 
-    for (int i = 0; i<key; ++i)
-    {
+    // Read off the horizontally to get the encrypted msg
+    for (int i = 0; i<key; ++i){
         for (int j = 0; j<len; ++j) {
             if(table[i*len + j]!='*')
             {
@@ -54,22 +58,25 @@ string RailfenceCipher::encrypt(const string& str) { // Encrypt a string
             }
         }
     }
+
     return encrypted;
 }
 
 string RailfenceCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted;
-    for (int i = 0; i<key; ++i)
-    {
+    int i = 0;
+
+    for (i = 0; i<key; ++i){ // Init
         for (int j = 0; j < len; ++j) {
             table[i*len + j] = '*';
         }
     }
 
+    // Mark the spots where encrypted letters should be placed
     bool direction;
-    int row = 0, col = 0;
-    for (int i=0; i<len; i++)
-    {
+    int row = 0;
+    int col = 0;
+    for (i=0; i<len; ++i){
         if (row == 0)
             direction = true;
         if (row == key-1)
@@ -79,17 +86,19 @@ string RailfenceCipher::decrypt(const string& str) { // Decrypt a string
         direction?row++ : row--;
     }
 
+    // Replace the marked spots with letters of the encrypted msg
     int idx = 0;
-    for (int i=0; i<key; ++i)
-        for (int j=0; j<len; ++j)
-            if (idx < len && table[i*len + j] == '#')
-            {
-                table[i*len + j] = str[idx++];
+    for (i=0; i<key; ++i) {
+        for (int j = 0; j < len; ++j) {
+            if (idx < len && table[i * len + j] == '#') {
+                table[i * len + j] = str[idx++];
             }
+        }
+    }
 
+    // Read the decrypted msg downwards and upwards diagonally,
     row = 0, col = 0;
-    for (int i=0; i<len; ++i)
-    {
+    for (i=0; i<len; ++i){
         if (row == 0)
             direction = true;
         if (row == key-1)

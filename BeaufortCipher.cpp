@@ -15,6 +15,7 @@ string BeaufortCipher::getKey() const { // Return key
 string BeaufortCipher::encrypt(const string& str) { // Encrypt a string
     string encrypted = str;
 
+    // Duplicate the key string to the length of the message
     int str_len = str.length();
     if (str_len < key.length())
     {
@@ -29,8 +30,8 @@ string BeaufortCipher::encrypt(const string& str) { // Encrypt a string
         }
     }
 
-    for(int i=0; i<str_len; ++i)
-    {
+    // Can be encrypted algebraically without creating a table
+    for(int i=0; i<str_len; ++i){
         encrypted[i] = FIRST_LETTER + (key[i] - str[i] + TOTAL_LETTERS)%TOTAL_LETTERS;
     }
 
@@ -40,8 +41,7 @@ string BeaufortCipher::encrypt(const string& str) { // Encrypt a string
 string BeaufortCipher::decrypt(const string& str) { // Decrypt a string
     string decrypted = str;
 
-    for(int i=0; i<str.length(); ++i)
-    {
+    for(int i=0; i<str.length(); ++i){ // Same process as encryption
         decrypted[i] = FIRST_LETTER + (key[i] - str[i] + TOTAL_LETTERS)%TOTAL_LETTERS;
     }
 

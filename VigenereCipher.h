@@ -6,7 +6,7 @@ using std::string;
 
 class VigenereCipher {
     string key = "";
-    char table[TOTAL_LETTERS][TOTAL_LETTERS] = {};
+    char table[TOTAL_LETTERS][TOTAL_LETTERS] = {}; // Vigenere table (aka "tabula recta")
 public:
     explicit VigenereCipher(string key); // Ctor
     string getKey() const; // Return key
