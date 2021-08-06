@@ -113,21 +113,21 @@ void cipherMsg(T Cipher, string msg) {
 }
 
 void menu(){
-    cout << "###################################" << endl;
-    cout << "##          Cipher Menu          ##" << endl;
-    cout << "###################################" << endl;
-    cout << "##                               ##" << endl;
-    cout << "##  Select one of the following: ##" << endl;
-    cout << "##                               ##" << endl;
-    cout << "##    1. Caesar Cipher           ##" << endl;
-    cout << "##    2. Vigenere Cipher         ##" << endl;
-    cout << "##    3. Railfence Cipher        ##" << endl;
-    cout << "##    4. Playfair Cipher         ##" << endl;
-    cout << "##    5. Beaufort Cipher         ##" << endl;
-    cout << "##    6. Autokey Cipher          ##" << endl;
-    cout << "##    7. Exit                    ##" << endl;
-    cout << "##                               ##" << endl;
-    cout << "###################################" << endl << endl;
+    cout << "               ###################################" << endl;
+    cout << "               ##          Cipher Menu          ##" << endl;
+    cout << "               ###################################" << endl;
+    cout << "               ##                               ##" << endl;
+    cout << "               ##  Select one of the following: ##" << endl;
+    cout << "               ##                               ##" << endl;
+    cout << "               ##    1. Caesar Cipher           ##" << endl;
+    cout << "               ##    2. Vigenere Cipher         ##" << endl;
+    cout << "               ##    3. Railfence Cipher        ##" << endl;
+    cout << "               ##    4. Playfair Cipher         ##" << endl;
+    cout << "               ##    5. Beaufort Cipher         ##" << endl;
+    cout << "               ##    6. Autokey Cipher          ##" << endl;
+    cout << "               ##    7. Exit                    ##" << endl;
+    cout << "               ##                               ##" << endl;
+    cout << "               ###################################" << endl << endl;
     cout << "Enter selection and then press the ENTER key:" << endl;
     int cipherSelected;
     cin >> cipherSelected;
@@ -136,6 +136,7 @@ void menu(){
     switch (cipherSelected) {
         case 1:{
             string msg = enterMsg("##    1. Caesar Cipher           ##");
+            msg = stringToLower(msg);
 
             int shiftKey;
             cout << endl << "Enter your integer key (greater than or equal to 0) "
