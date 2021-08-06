@@ -60,9 +60,9 @@ string stringSpacesRemove(string str) {
 // Print selection and get msg as input
 string enterMsg(string selection_str){
     cout << endl;
-    cout << "###################################" << endl;
+    cout << "###################################################################" << endl;
     cout << selection_str << endl;
-    cout << "###################################" << endl << endl;
+    cout << "###################################################################" << endl << endl;
 
     string msg;
     cout << "Enter your message and then press the ENTER key:" << endl;
@@ -92,13 +92,15 @@ bool checkAlpha(string key, const string& checkLength)
 string getStringKey(const string& checkLength = "")
 {
     string key;
-    cout << endl << "Enter your string key:" << endl;
+    cout << endl << "Enter your key string:" << endl;
     getline(cin, key);
+    key = stringSpacesRemove(key);
     while( !checkAlpha(key, checkLength) )
     {
         cin.clear();
         cout << endl << "Invalid length! Please enter a valid string:" << endl;
         getline(cin, key);
+        key = stringSpacesRemove(key);
     }
     return key;
 }
@@ -135,12 +137,12 @@ void menu(){
     // Menu cases
     switch (cipherSelected) {
         case 1:{
-            string msg = enterMsg("##    1. Caesar Cipher           ##");
+            string msg = enterMsg("##                     1. Caesar Cipher                          ##");
             msg = stringToLower(msg);
 
             int shiftKey;
-            cout << endl << "Enter your integer key (greater than or equal to 0) "
-                            "and then press the ENTER key:" << endl;
+            cout << endl << "Enter your key number and then press the ENTER key:"
+            << endl << "(must be integer greater than or equal to 0)" << endl;
             cin >> shiftKey;
             while (!cin.good() || shiftKey < 0)
             {
@@ -156,8 +158,8 @@ void menu(){
             break;
         }
         case 2:{
-            string msg = enterMsg("##    2. Vigenere Cipher         ##");
-
+            string msg = enterMsg("##                     2. Vigenere Cipher                        ##");
+            msg = stringToLower(stringSpacesRemove(msg));
             string key = getStringKey(msg);
 
             VigenereCipher VigenereCipher(key); // Ctor
@@ -166,11 +168,11 @@ void menu(){
             break;
         }
         case 3:{
-            string msg = enterMsg("##    3. Railfence Cipher        ##");
+            string msg = enterMsg("##                      3. Railfence Cipher                      ##");
 
             int shiftKey;
-            cout << endl << "Enter your integer key (greater than 1) "
-                            "and then press the ENTER key:" << endl;
+            cout << endl << "Enter your key number and then press the ENTER key: "
+            << endl << "(must be integer greater than 1)" << endl;
             cin >> shiftKey;
             while (!cin.good() || shiftKey < 1)
             {
@@ -186,7 +188,7 @@ void menu(){
             break;
         }
         case 4:{
-            string msg = enterMsg("##    4. Playfair Cipher         ##");
+            string msg = enterMsg("##                      4. Playfair Cipher                       ##");
             msg = stringSpacesRemove(stringToLower(msg));
 
             string key = getStringKey();
@@ -198,7 +200,7 @@ void menu(){
             break;
         }
         case 5:{
-            string msg = enterMsg("##    5. Beaufort Cipher         ##");
+            string msg = enterMsg("##                      5. Beaufort Cipher                       ##");
             msg = stringSpacesRemove(stringToLower(msg));
 
             string key = getStringKey();
@@ -210,7 +212,7 @@ void menu(){
             break;
         }
         case 6:{
-            string msg = enterMsg("##    6. Autokey Cipher          ##");
+            string msg = enterMsg("##                       6. Autokey Cipher                       ##");
             msg = stringSpacesRemove(stringToLower(msg));
 
             string key = getStringKey();
